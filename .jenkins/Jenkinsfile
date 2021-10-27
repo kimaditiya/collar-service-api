@@ -32,6 +32,31 @@ pipeline {
                 }
             }
         }
+		stage("Build and Push Image") {
+			steps {
+				echo 'Compiling and building'
+				script {
+					docker.withRegistry('http://20.100.1.191:5000','registry') {
+						def images = docker.build("smf/collar-api:v1.${BUILD_NUMBER}")
+						images.push("v1.${BUILD_NUMBER}")
+					}
+				}
+				sh "docker rmi -f \$(docker images smf/collar-api -q)"
+			}
+		}
+		stage("Proceed Deployment?") {
+			steps {
+				script {
+					input message: 'Deploy to production?', ok: 'Yes'
+				}
+			}
+		}
+		stage("Deploying To Production") {
+			steps {
+				sh "sed -i 's|<tag_placeholder>|v1.${BUILD_NUMBER}|g' .jenkins/playbook.yml"
+				sh "ansible-playbook -i .jenkins/inventory.yml .jenkins/playbook.yml"
+			}
+		}
 	}
 }
 
