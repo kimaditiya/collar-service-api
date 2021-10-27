@@ -16,5 +16,5 @@ USER $APP_USER
 WORKDIR $APP_HOME
 RUN go build -o main .
 EXPOSE 8080
-#CMD ["bee", "run"]
-CMD ["/go/src/app/main"]
+CMD ["bee", "run"]
+#CMD ["/go/src/app/main"]
