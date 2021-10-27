@@ -1,6 +1,6 @@
 FROM golang:1.17-alpine
 
-#RUN go get -u github.com/beego/bee
+RUN go get -u github.com/beego/bee
 ENV GO111MODULE=on
 ENV GOFLAGS=-mod=vendor
 ENV APP_USER app
