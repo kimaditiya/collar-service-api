@@ -13,4 +13,5 @@ type User struct {
 	Created_at time.Time
 	Update_by  string
 	Update_at  time.Time
+	CoreUser   string
 }
