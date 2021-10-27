@@ -1,0 +1,11 @@
+- hosts: docker
+  become: yes
+  tasks:
+    - name: Deploy Apps
+      docker_container:
+        name: collar-api
+        image: 20.100.1.191:5000/smf/collar-api:<tag_placeholder>
+        state: started
+        recreate: yes
+        ports:
+          - "8080:8080"

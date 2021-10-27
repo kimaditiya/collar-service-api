@@ -7,6 +7,7 @@ import (
 // buat interface untuk user
 type Repository interface {
 	Save(user User) (User, error)
+	FindByNIK(nik string) (User, error)
 }
 
 type repository struct {
@@ -21,6 +22,18 @@ func NewRepository(db *gorm.DB) *repository {
 func (r *repository) Save(user User) (User, error) {
 	err := r.db.Create(&user).Error
 
+	if err != nil {
+		return user, err
+	}
+
+	return user, nil
+}
+
+//Find By NIK
+func (r *repository) FindByNIK(nik string) (User, error) {
+	var user User
+
+	err := r.db.Where("nik = ?", nik).Find(&user).Error
 	if err != nil {
 		return user, err
 	}

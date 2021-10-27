@@ -23,6 +23,32 @@ func main() {
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
 
+	// userByEmail, err := userRepository.FindByEmail("arkans@gandul.com")
+
+	// if err != nil {
+	// 	fmt.Println(err.Error())
+	// }
+
+	// if userByEmail.ID == 0 {
+	// 	fmt.Println("User Not Found")
+	// } else {
+
+	// 	fmt.Println(userByEmail.FullName)
+	// }
+
+	// input := user.LoginInput{
+	// 	NIK:      "1234567",
+	// 	Password: "password",
+	// }
+
+	// user, err := userService.Login(input)
+	// if err != nil {
+	// 	fmt.Println("Terjadi Kesalahan")
+	// 	fmt.Println(err.Error())
+	// }
+
+	// fmt.Println(user.NIK)
+
 	//routing
 	userHandler := handler.NewUserHandler(userService)
 
@@ -31,46 +57,8 @@ func main() {
 	api := router.Group("/api/v1")
 
 	api.POST("/users", userHandler.RegisterUser)
+	api.POST("/sessions", userHandler.Login)
 
 	router.Run()
 
-	// userInput := user.RegisterUserInput{}
-	// userInput.FullName = "Test From Service"
-	// userInput.NIK = "23456"
-	// userInput.Email = "test@smartfinance.co.id"
-	// userInput.Password = "asdf1234"
-
-	// userService.RegisterUserInput(userInput)
-
-	// userRepository.Save(user)
-
-	// for _, users := range users {
-	// 	fmt.Println(users.NIK)
-	// 	fmt.Println(users.FullName)
-	// 	fmt.Println(users.Email)
-	// 	fmt.Println("=================")
-
-	// }
-
-	// router := gin.Default()
-	// router.GET("/", handler)
-	// router.Run()
-
 }
-
-// func handler(c *gin.Context) {
-// 	dsn := "root:@tcp(127.0.0.1:3306)/db_new_collar?charset=utf8mb4&parseTime=True&loc=Local"
-// 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-
-// 	if err != nil {
-// 		fmt.Println(err.Error())
-// 	}
-
-// 	fmt.Println("Connect to database establish successfully")
-
-// 	var users []user.User
-
-// 	db.Find(&users)
-
-// 	c.JSON(http.StatusOK, users)
-// }

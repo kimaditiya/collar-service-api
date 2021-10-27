@@ -6,6 +6,7 @@ type UserFormatter struct {
 	NIK      string `json:"nik"`
 	Token    string `json:"token"`
 	Email    string `json:"email"`
+	CoreUser string `json:"coreuser"`
 }
 
 func FormatUser(user User, token string) UserFormatter {
@@ -14,6 +15,7 @@ func FormatUser(user User, token string) UserFormatter {
 		FullName: user.FullName,
 		NIK:      user.NIK,
 		Token:    token,
+		CoreUser: user.CoreUser,
 		Email:    user.Email,
 	}
 	return formater

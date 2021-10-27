@@ -5,4 +5,10 @@ type RegisterUserInput struct {
 	NIK      string `json:"nik" binding:"required"`
 	Password string `json:"password" binding:"required"`
 	Email    string `json:"email" binding:"required,email"`
+	CoreUser string `json:"coreuser" binding:"required"`
+}
+
+type LoginInput struct {
+	NIK      string `json:"nik" binding:"required"`
+	Password string `json:"password" binding:"required"`
 }
