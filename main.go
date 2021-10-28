@@ -5,6 +5,7 @@ import (
 	"collar-service-api/user"
 	"log"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -53,7 +54,7 @@ func main() {
 	userHandler := handler.NewUserHandler(userService)
 
 	router := gin.Default()
-
+	router.Use(cors.Default())
 	api := router.Group("/api/v1")
 
 	api.POST("/users", userHandler.RegisterUser)
