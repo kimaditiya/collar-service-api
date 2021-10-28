@@ -3,7 +3,7 @@ package customers
 import "time"
 
 type Customers struct {
-	Dd                     int
+	ID                     int
 	BranchID               string
 	ReferenceAct           string
 	ApplicationID          string
