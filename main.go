@@ -1,6 +1,7 @@
 package main
 
 import (
+	"collar-service-api/customers"
 	"collar-service-api/handler"
 	"collar-service-api/user"
 	"log"
@@ -23,6 +24,9 @@ func main() {
 	//init process, parsing db connection
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
+	//customer Repository
+	customerRepository := customers.NewRepository(db)
+	customerService := customers.NewService(customerRepository)
 
 	// userByEmail, err := userRepository.FindByEmail("arkans@gandul.com")
 
@@ -52,6 +56,7 @@ func main() {
 
 	//routing
 	userHandler := handler.NewUserHandler(userService)
+	customerHandler := handler.NewCustomerHandler(customerService)
 
 	router := gin.Default()
 	router.Use(cors.Default())
@@ -59,6 +64,7 @@ func main() {
 
 	api.POST("/users", userHandler.RegisterUser)
 	api.POST("/sessions", userHandler.Login)
+	api.GET("/customers", customerHandler.ListOfCustomer)
 
 	router.Run()
 
