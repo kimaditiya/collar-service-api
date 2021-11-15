@@ -29,7 +29,7 @@ type Customers struct {
 	NoRangka             string
 	NoMesin              string
 	DebtorAddress        string
-	DebtorDistrict       string
+	DebtorDisctrict      string
 	DebtorSubDistrict    string
 	DebtorCity           string
 	DebtorPostalCode     string
