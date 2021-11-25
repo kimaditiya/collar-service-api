@@ -46,3 +46,37 @@ func (h *menuHandler) MenuNew(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 
 }
+
+func (h *menuHandler) GetAll(c *gin.Context) {
+
+	listMenu, err := h.menuService.GetAllMenu()
+
+	if err != nil {
+		errorMessage := gin.H{"errors": err.Error()}
+
+		response := helper.APIResponse("No Data Found", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	response := helper.APIResponse("Data Found", http.StatusOK, "Data Found", listMenu)
+
+	c.JSON(http.StatusOK, response)
+}
+
+func (h *menuHandler) GetAllMenuParent(c *gin.Context) {
+
+	listMenu, err := h.menuService.GetAllMenusParent()
+
+	if err != nil {
+		errorMessage := gin.H{"errors": err.Error()}
+
+		response := helper.APIResponse("No Data Found", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	response := helper.APIResponse("Data Found", http.StatusOK, "Data Found", listMenu)
+
+	c.JSON(http.StatusOK, response)
+}
