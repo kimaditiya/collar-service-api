@@ -85,3 +85,34 @@ func (h *userHandler) Login(c *gin.Context) {
 
 	c.JSON(http.StatusOK, response)
 }
+
+func (h *userHandler) CreateUserRoles(c *gin.Context) {
+	var input user.UserRolesInput
+
+	err := c.ShouldBindJSON(&input)
+
+	if err != nil {
+
+		errors := helper.FormatValidationError(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := helper.APIResponse("Failed Created Account", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	newUserRoles, err := h.userService.UserRolesCreate(input)
+
+	if err != nil {
+		response := helper.APIResponse("Failed Created Account", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	formatter := user.FormatUserRoles(newUserRoles)
+
+	response := helper.APIResponse("Account Created", http.StatusOK, "success", formatter)
+
+	c.JSON(http.StatusOK, response)
+
+}

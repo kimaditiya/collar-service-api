@@ -12,3 +12,9 @@ type LoginInput struct {
 	NIK      string `json:"nik" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
+
+type UserRolesInput struct {
+	// ID       int `json:"id" binding:"required"`
+	UserID   int `json:"user_id" binding:"required"`
+	RoleCode int `json:"rolecode" binding:"required"`
+}

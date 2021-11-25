@@ -9,6 +9,7 @@ import (
 type Service interface {
 	RegisterUserInput(input RegisterUserInput) (User, error)
 	Login(input LoginInput) (User, error)
+	UserRolesCreate(input UserRolesInput) (UserRoles, error)
 }
 
 type service struct {
@@ -63,4 +64,18 @@ func (s *service) Login(input LoginInput) (User, error) {
 	}
 
 	return user, nil
+}
+
+func (s *service) UserRolesCreate(input UserRolesInput) (UserRoles, error) {
+	userRoles := UserRoles{}
+	userRoles.UserID = input.UserID
+	// userRoles.ID = input.ID
+	userRoles.RoleCode = input.RoleCode
+
+	userRoles, err := s.repository.SaveUserRoles(userRoles)
+
+	if err != nil {
+		return userRoles, err
+	}
+	return userRoles, nil
 }

@@ -8,6 +8,7 @@ import (
 type Repository interface {
 	Save(user User) (User, error)
 	FindByNIK(nik string) (User, error)
+	SaveUserRoles(userRoles UserRoles) (UserRoles, error)
 }
 
 type repository struct {
@@ -39,4 +40,14 @@ func (r *repository) FindByNIK(nik string) (User, error) {
 	}
 
 	return user, nil
+}
+
+//Create User Roles
+func (r *repository) SaveUserRoles(userRoles UserRoles) (UserRoles, error) {
+	err := r.db.Create(&userRoles).Error
+
+	if err != nil {
+		return userRoles, err
+	}
+	return userRoles, nil
 }
