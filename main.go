@@ -7,7 +7,6 @@ import (
 	"collar-service-api/listarea"
 	"collar-service-api/listbranch"
 	"collar-service-api/menu"
-	"collar-service-api/menuchildnew"
 	"collar-service-api/user"
 	"log"
 
@@ -36,11 +35,9 @@ func main() {
 	//menu Repository
 	menusRepository := menu.NewRepository(db)
 	menuService := menu.NewService(menusRepository)
-	//menu child Repository
-	// menuChildRepository := menuchild.NewRepository(db)
-	// menuChildService := menuchild.NewService(menuChildRepository)
-	menuChildNewRepositoy := menuchildnew.NewRepository(db)
-	menuChildNewService := menuchildnew.NewService(menuChildNewRepositoy)
+
+	// menuChildNewRepositoy := menuchildnew.NewRepository(db)
+	// menuChildNewService := menuchildnew.NewService(menuChildNewRepositoy)
 	// list Area Repository
 	listAreaNewRepository := listarea.NewRepository(db)
 	listAreaNewService := listarea.NewService(listAreaNewRepository)
@@ -81,7 +78,7 @@ func main() {
 	userHandler := handler.NewUserHandler(userService)
 	customerHandler := handler.NewCustomerHandler(customerService)
 	menuHandler := handler.NewMenuHandler(menuService)
-	menuChildNewHandler := handler.MenuNewChildHandler(menuChildNewService)
+	// menuChildNewHandler := handler.MenuNewChildHandler(menuChildNewService)
 	listAreaNewHandler := handler.NewListAreaHandler(listAreaNewService)
 	listBranchNewHandler := handler.NewListBranchHandler(listBranchNewService)
 	collectionGroupNewHandler := handler.NewCollectionGroupHandler(collectionGroupNewService)
@@ -101,7 +98,7 @@ func main() {
 	api.POST("/customersByDueDate", customerHandler.FindListOfCustomerByDueDate)
 
 	api.POST("/addMenu", menuHandler.MenuNew)
-	api.POST("/addMenuChildNew", menuChildNewHandler.MenuChildNew)
+	// api.POST("/addMenuChildNew", menuChildNewHandler.MenuChildNew)
 	api.GET("/getAllMenu", menuHandler.GetAll)
 	api.GET("/getAllMenuParent", menuHandler.GetAllMenuParent)
 	api.GET("/getAllListArea", listAreaNewHandler.GetAllListArea)
