@@ -116,3 +116,20 @@ func (h *userHandler) CreateUserRoles(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 
 }
+
+func (h *userHandler) GetAllListUser(c *gin.Context) {
+
+	listUser, err := h.userService.GetAllListUser()
+
+	if err != nil {
+		errorMessage := gin.H{"errors": err.Error()}
+
+		response := helper.APIResponse("No Data Found", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	response := helper.APIResponse("Data Found", http.StatusOK, "Data Found", listUser)
+
+	c.JSON(http.StatusOK, response)
+}

@@ -6,7 +6,7 @@ type Customers struct {
 	RYM                  string
 	BranchID             string
 	ApplicationID        string
-	AgreementNo          string
+	AgreementNo          string `gorm:"column:AgreementNo" json:"AgreementNo"`
 	FullName             string
 	BranchFullName       string
 	Periode              int
@@ -37,4 +37,14 @@ type Customers struct {
 	CreatedBy            string
 	UpdatedAt            time.Time
 	UpdatedBy            string
+	KodeSubPos           string `gorm:"column:kd_subpos" json:"KodeSubPos"`
+}
+
+type Tabler interface {
+	TableName() string
+}
+
+// TableName overrides the table name
+func (Customers) TableName() string {
+	return "vw_listloc"
 }

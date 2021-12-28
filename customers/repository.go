@@ -32,8 +32,7 @@ func (r *repository) ListOfCustomer() ([]Customers, error) {
 	//var rstcustomers Customers
 	var rstcustomers []Customers
 
-	err := r.db.Debug().Table("tr_coll_loc").Select("RYM, BranchID, ApplicationID, AgreementNo, FullName, Periode, Product, ProductID, Model, DueDate, InstallmentAmount, LateChargeAmount, MinimalPayment, AmountTobePaid, OvdDays, CollectorCode, IDNumber, isSyariah, Tenor, OutstandingPrincipal, Bucket, ContractStatus, NoPolicy, NoRangka, NoMesin, DebtorAddress, DebtorDisctrict, DebtorSubDistrict, DebtorCity, DebtorPostalCode, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy").
-		Find(&rstcustomers).Error
+	err := r.db.Debug().Table("vw_listloc").Find(&rstcustomers).Error
 
 	if err != nil {
 		return rstcustomers, err
@@ -46,7 +45,7 @@ func (r *repository) ListOfCustomer() ([]Customers, error) {
 func (r *repository) FindLisOfCustomerByProduct(product string) ([]Customers, error) {
 	var listOfCustomerByProduct []Customers
 
-	err := r.db.Where("Product = ?", product).Table("tr_coll_loc").Find(&listOfCustomerByProduct).Error
+	err := r.db.Where("Product = ?", product).Table("vw_listloc").Find(&listOfCustomerByProduct).Error
 	if err != nil {
 		return listOfCustomerByProduct, err
 	}
@@ -57,7 +56,7 @@ func (r *repository) FindLisOfCustomerByProduct(product string) ([]Customers, er
 func (r *repository) FindListOfCustomerByOvd(OvdDays int) ([]Customers, error) {
 	var listOfCustomerByOvd []Customers
 
-	err := r.db.Where("OvdDays = ?", OvdDays).Table("tr_coll_loc").Find(&listOfCustomerByOvd).Error
+	err := r.db.Where("OvdDays = ?", OvdDays).Table("vw_listloc").Find(&listOfCustomerByOvd).Error
 	if err != nil {
 		return listOfCustomerByOvd, err
 	}
@@ -68,7 +67,7 @@ func (r *repository) FindListOfCustomerByOvd(OvdDays int) ([]Customers, error) {
 func (r *repository) FindListOfCustomerByDueDate(DueDate time.Time) ([]Customers, error) {
 	var listOfCustomerByDueDate []Customers
 
-	err := r.db.Where("DueDate = ?", DueDate).Table("tr_coll_loc").Find(&listOfCustomerByDueDate).Error
+	err := r.db.Where("DueDate = ?", DueDate).Table("vw_listloc").Find(&listOfCustomerByDueDate).Error
 	if err != nil {
 		return listOfCustomerByDueDate, err
 	}
@@ -80,8 +79,7 @@ func (r *repository) ListOfCustomerColl() ([]Customers, error) {
 
 	var rstcustomers []Customers
 
-	err := r.db.Debug().Table("tr_coll_loc").Select("RYM, BranchID, ApplicationID, AgreementNo, FullName, Periode, Product, ProductID, Model, DueDate, InstallmentAmount, LateChargeAmount, MinimalPayment, AmountTobePaid, OvdDays, CollectorCode, IDNumber, isSyariah, Tenor, OutstandingPrincipal, Bucket, ContractStatus, NoPolicy, NoRangka, NoMesin, DebtorAddress, DebtorDisctrict, DebtorSubDistrict, DebtorCity, DebtorPostalCode, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy").
-		Find(&rstcustomers).Error
+	err := r.db.Debug().Table("vw_listloc").Find(&rstcustomers).Error
 
 	if err != nil {
 		return rstcustomers, err

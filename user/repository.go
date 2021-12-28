@@ -9,6 +9,7 @@ type Repository interface {
 	Save(user User) (User, error)
 	FindByNIK(nik string) (User, error)
 	SaveUserRoles(userRoles UserRoles) (UserRoles, error)
+	GetAllListUser() ([]User, error)
 }
 
 type repository struct {
@@ -17,6 +18,16 @@ type repository struct {
 
 func NewRepository(db *gorm.DB) *repository {
 	return &repository{db}
+}
+
+func (r *repository) GetAllListUser() ([]User, error) {
+	var listUser []User
+
+	err := r.db.Table("users").Find(&listUser).Error
+	if err != nil {
+		return listUser, err
+	}
+	return listUser, nil
 }
 
 // function Save

@@ -14,7 +14,6 @@ type LoginInput struct {
 }
 
 type UserRolesInput struct {
-	// ID       int `json:"id" binding:"required"`
 	UserID   int `json:"user_id" binding:"required"`
 	RoleCode int `json:"rolecode" binding:"required"`
 }

@@ -10,6 +10,7 @@ type Service interface {
 	RegisterUserInput(input RegisterUserInput) (User, error)
 	Login(input LoginInput) (User, error)
 	UserRolesCreate(input UserRolesInput) (UserRoles, error)
+	GetAllListUser() ([]User, error)
 }
 
 type service struct {
@@ -78,4 +79,13 @@ func (s *service) UserRolesCreate(input UserRolesInput) (UserRoles, error) {
 		return userRoles, err
 	}
 	return userRoles, nil
+}
+
+func (s *service) GetAllListUser() ([]User, error) {
+
+	listUser, err := s.repository.GetAllListUser()
+	if err != nil {
+		return listUser, err
+	}
+	return listUser, nil
 }

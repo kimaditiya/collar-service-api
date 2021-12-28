@@ -10,11 +10,9 @@ type User struct {
 	Password   string
 	Email      string
 	Created_by string
-	Created_at time.Time
-	Update_by  string
-	Update_at  time.Time
 	CoreUser   string
 }
+
 type UserRoles struct {
 	ID         int
 	UserID     int

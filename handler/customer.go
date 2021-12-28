@@ -65,20 +65,6 @@ func (h *customerHandler) FindListOfCustomerByDueDate(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 func (h *customerHandler) ListOfCustomer(c *gin.Context) {
-	// var input customers.FindCustomer
-
-	// err := c.ShouldBindJSON(&input)
-	// err := c.ShouldBindJSON(&input)
-
-	// if err != nil {
-	// 	errorMessage := gin.H{"errors": err.Error()}
-	// 	response := helper.APIResponse("No Data Found", http.StatusUnprocessableEntity, "error", errorMessage)
-
-	// 	c.JSON(http.StatusUnprocessableEntity, response)
-	// 	return
-	// }
-
-	// listCustomer, err := h.customerService.ListOfCustomer(input)
 	listCustomer, err := h.customerService.ListOfCustomer()
 
 	if err != nil {
